@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/bash 
 set -o pipefail
 
 mkdir configs/
 cat << EOF > configs/generated_config.yml
+{% raw -%}
 version: 2.1
 jobs:
   node:
@@ -135,7 +136,7 @@ jobs:
 
   ios:
     macos:
-      xcode: "11.7.7"
+      xcode: "11.1.0"
     working_directory: ~/build
 
     # use a --login shell so our "set Ruby version" command gets picked up for later steps
@@ -144,8 +145,9 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - 'c5:bd:6d:0b:a1:39:97:83:ca:b5:13:59:14:ff:49:40'
-
+{%- endraw %}
+            - 'ProjectSSHKeyFingerPrint'
+{% raw %}
       - checkout
 
       - run:
@@ -271,4 +273,5 @@ workflows:
       - ios:
           requires:
             - node
+{%- endraw %}
 EOF
