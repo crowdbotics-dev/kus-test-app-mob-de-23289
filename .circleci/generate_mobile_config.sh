@@ -136,7 +136,7 @@ jobs:
 
   ios:
     macos:
-      xcode: "12.0.0"
+      xcode: "13.0.0"
     working_directory: ~/build
 
     # use a --login shell so our "set Ruby version" command gets picked up for later steps
